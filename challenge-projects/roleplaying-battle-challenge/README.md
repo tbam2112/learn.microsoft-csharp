@@ -1,5 +1,5 @@
-# H1 Code challenge - write code to implement the game rules
-## H2 Here are the rules for the battle game that you need to implement in your code project:
+# Code challenge - write code to implement the game rules
+## Here are the rules for the battle game that you need to implement in your code project:
 
 1. You must use either the do-while statement or the while statement as an outer game loop.
 2. The hero and the monster will start with 10 health points.
