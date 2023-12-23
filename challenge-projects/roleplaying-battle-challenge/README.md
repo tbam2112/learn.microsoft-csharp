@@ -22,3 +22,5 @@ Monster was damaged and lost 7 health and now has 2 health.\
 Hero was damaged and lost 6 health and now has 3 health.\
 Monster was damaged and lost 9 health and now has -7 health.\
 Hero wins!
+
+### Thank you for reading! :) 
