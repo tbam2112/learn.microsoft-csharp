@@ -12,7 +12,7 @@ internal class Program
 
         // variables that support data entry
         int maxPets = 8;
-        string readResult;
+        string? readResult;
         string menuSelection = "";
 
         // array used to store runtime data, there is no persisted data
@@ -131,9 +131,51 @@ internal class Program
 
                 case "2":
                     // Add a new animal friend to the ourAnimals array
-                    Console.WriteLine("This app feature is coming soon - please check back to see progress.");
-                    Console.WriteLine("Press the Enter key to continue.");
-                    readResult = Console.ReadLine();
+                    string anotherPet = "y";
+                    int petCount = 0;
+
+                    for (int i = 0; i < maxPets; i++)
+                    {
+                        if (ourAnimals[i,0] != "ID #: ")
+                        {
+                            petCount += 1;
+                        }
+                    }
+
+                    if (petCount < maxPets)
+                    {
+                        Console.WriteLine($"We currently have {petCount} pets that need homes. We can manage {(maxPets - petCount)} more.");
+                    }
+
+                    while (anotherPet == "y" && petCount < maxPets)
+                    {
+                        petCount += 1;
+
+                        if (petCount < maxPets)
+                        {
+                            Console.WriteLine("Do you want to enter info for another pet (y/n)");
+
+                            do
+                            {
+                                readResult = Console.ReadLine();
+
+                                if (readResult != null)
+                                {
+                                    anotherPet = readResult.ToLower();
+                                }
+                            } while (anotherPet != "y" && anotherPet != "n");
+                        }
+
+                        
+                    }
+
+                    if (petCount >= maxPets)
+                    {
+                        Console.WriteLine("We have reached our limit on the number of pets that we can manage.");
+                        Console.WriteLine("Press the Enter key to continue.");
+                        readResult = Console.ReadLine();
+                    }
+
                     break;
 
                 case "3":
