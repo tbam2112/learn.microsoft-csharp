@@ -213,7 +213,7 @@ do
                             animalPhysicalDescription = "tbd";
                         }
                     }
-                } while (validEntry == false);
+                } while (animalPhysicalDescription == "");
 
 
                 // get a description of the pet's personality - animalPersonalityDescription can be blank.
@@ -229,7 +229,7 @@ do
                             animalPersonalityDescription = "tbd";
                         }
                     }
-                } while (validEntry == false);
+                } while (animalPersonalityDescription == "");
 
 
                 // get the pet's nickname. animalNickname can be blank.
@@ -245,7 +245,7 @@ do
                             animalNickname = "tbd";
                         }
                     }
-                } while (validEntry == false);
+                } while (animalNickname == "");
 
                 // store the pet information in the ourAnimals array (zero based)
                 ourAnimals[petCount, 0] = "ID #: " + animalID;
@@ -287,7 +287,61 @@ do
 
         case "3":
             // Ensure animal ages and physical descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
+
+            // sort each animal in array
+            /* skip animals with default value in petID
+             * Display petID value and prompt user for updated data value for age
+             * ensure valid numeric value is assigned ect. 1 2 3 4 
+             * ensure valid string assigned to animalPhysicalDescription
+                  * Not null, string < 0 
+             * Inform user requirements are met, and pause app with Console.ReadLine();
+            */
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    while (ourAnimals[i, 2] == "Age: ?" || ourAnimals[i, 4] == "Physical description: ")
+                    {
+                        if (ourAnimals[i, 2] == "Age: ?")
+                        {
+                            do
+                            {
+                                Console.WriteLine($"Enter an age for {ourAnimals[i, 0]}");
+                                readResult = Console.ReadLine();
+                                if (readResult != null)
+                                {
+                                    validEntry = int.TryParse(readResult, out petAge);
+                                    ourAnimals[i, 2] = "Age: " + petAge;
+                                }
+                            } while (validEntry == false);
+                        }
+                        else if (ourAnimals[i, 4] == "Physical description: ")
+                        {
+                            do
+                            {
+                                Console.WriteLine($"Enter a physical description for {ourAnimals[i, 0]} (size, color, breed, gender, weight, housebroken)");
+                                readResult = Console.ReadLine();
+                                if (readResult != null)
+                                {
+                                    switch (readResult.Length)
+                                    {
+                                        case >= 8:
+                                            animalPhysicalDescription = readResult;
+                                            ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
+                                            validEntry = true;
+                                            break;
+
+                                        case < 8:
+                                            Console.WriteLine("Please enter a detailed description of the animal.\n");
+                                            break;
+                                    }
+                                }
+                            } while (validEntry == false);
+                        }
+                    }
+                }
+            }
+            //Console.WriteLine("Challenge Project - please check back soon to see progress.");
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
@@ -312,7 +366,7 @@ do
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
-        
+
         case "7":
             // Display all cats with a specified characteristic
             Console.WriteLine("UNDER CONSTRUCTION - please check back next month to see progress.");
