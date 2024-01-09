@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.Design;
 using System.IO;
 
 // the ourAnimals array will store the following: 
@@ -302,46 +303,37 @@ do
                 {
                     while (ourAnimals[i, 2] == "Age: ?" || ourAnimals[i, 4] == "Physical description: ")
                     {
-                        if (ourAnimals[i, 2] == "Age: ?")
+                        do
                         {
-                            do
+                            Console.WriteLine($"Enter an age for {ourAnimals[i, 0]}");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
                             {
-                                Console.WriteLine($"Enter an age for {ourAnimals[i, 0]}");
-                                readResult = Console.ReadLine();
-                                if (readResult != null)
-                                {
-                                    validEntry = int.TryParse(readResult, out petAge);
-                                    ourAnimals[i, 2] = "Age: " + petAge;
-                                }
-                            } while (validEntry == false);
-                        }
-                        else if (ourAnimals[i, 4] == "Physical description: ")
-                        {
-                            do
-                            {
-                                Console.WriteLine($"Enter a physical description for {ourAnimals[i, 0]} (size, color, breed, gender, weight, housebroken)");
-                                readResult = Console.ReadLine();
-                                if (readResult != null)
-                                {
-                                    switch (readResult.Length)
-                                    {
-                                        case >= 8:
-                                            animalPhysicalDescription = readResult;
-                                            ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
-                                            validEntry = true;
-                                            break;
+                                validEntry = int.TryParse(readResult, out petAge);
+                                ourAnimals[i, 2] = "Age: " + petAge;
+                            }
+                        } while (validEntry == false);
 
-                                        case < 8:
-                                            Console.WriteLine("Please enter a detailed description of the animal.\n");
-                                            break;
-                                    }
-                                }
-                            } while (validEntry == false);
-                        }
+                        do
+                        {
+                            Console.WriteLine($"Enter a detailed physical description for {ourAnimals[i, 0]} (size, color, breed, gender, weight, housebroken)");
+                            readResult = Console.ReadLine();
+
+                            if (readResult != null && readResult.Length >= 8)
+                            {
+                                animalPhysicalDescription = readResult;
+                                ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
+                                validEntry = true;
+                            }
+                            else
+                            {
+                                validEntry = false;
+                            }
+                        } while (validEntry == false);
                     }
                 }
             }
-            //Console.WriteLine("Challenge Project - please check back soon to see progress.");
+            Console.WriteLine("Age and physical description fields are complete for all of our friends");
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
